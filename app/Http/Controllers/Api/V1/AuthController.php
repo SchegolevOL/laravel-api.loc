@@ -26,6 +26,8 @@ class AuthController extends Controller
             'token'=>$user->createToken("Token of user: {$user->name}")->plainTextToken]);
     }
     public function logout(){
-        return 'Logout';
+        Auth::user()->currentAccessToken()->delete();
+
+        return response()->json(['message'=>'Token removed']);
     }
 }
